@@ -1,23 +1,24 @@
 package hrms.hrms.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import hrms.hrms.core.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.text.SimpleDateFormat;
-
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper=false)
+//@EqualsAndHashCode(callSuper=false)
 @Table(name="candidates")
 @PrimaryKeyJoinColumn(name="id")
-
-public class Candidate extends User{
+@JsonIgnoreProperties({"hibernateLazyInitializer","candidateResumes"})
+public class Candidate extends User {
 
     /*@Column(name="id")
     private int id;*/
@@ -32,6 +33,28 @@ public class Candidate extends User{
 
     @Column(name="birth_year")
     private int birthYear;
+
+    @Column(name="image_path")
+    private String imagePath;
+
+
+    @Column(name="github_link")
+    private String githubLink;
+
+    @Column(name="linkedin_link")
+    private String linkedinLink;
+
+    @Column(name="personal_website")
+    private String personalWebsite;
+
+    @OneToMany(mappedBy = "candidate")
+    private List<CandidateResume> candidateResumes;
+
+    @OneToMany(mappedBy="candidate")
+    private List<VerificationCodeCandidate> verificationCodeCandidates;
+
+    @OneToMany(mappedBy="candidate")
+    private List<CandidateCoverLetter> candidateCoverLetters;
 
 
     

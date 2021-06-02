@@ -4,6 +4,7 @@ import hrms.hrms.business.abstracts.EmployerService;
 import hrms.hrms.core.utilities.results.*;
 import hrms.hrms.dataAccess.abstracts.EmployerDao;
 import hrms.hrms.entities.concretes.Employer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 public class EmployerManager implements EmployerService {
     EmployerDao employerDao;
 
+    @Autowired
     public EmployerManager(EmployerDao employerDao) {
         this.employerDao = employerDao;
     }

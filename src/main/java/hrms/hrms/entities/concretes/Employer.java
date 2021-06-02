@@ -1,11 +1,11 @@
 package hrms.hrms.entities.concretes;
 
+import hrms.hrms.core.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.persistence.*;
@@ -13,14 +13,14 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Data
-@EqualsAndHashCode(callSuper=false)
+//@EqualsAndHashCode(callSuper=false)
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="employers")
 @PrimaryKeyJoinColumn(name="id")
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler","jobAdvertisements"})
-public class Employer extends User{
+public class Employer extends User {
 
 
     /*@Column(name="id")
@@ -37,6 +37,12 @@ public class Employer extends User{
     
     @OneToMany(mappedBy="employer")
     private List<JobAdvertisement> jobAdvertisements;
+
+    @OneToMany(mappedBy="employer")
+    private List<VerificationCodeEmployer> verificationCodeEmployers;
+
+    @OneToMany(mappedBy="employer")
+    private List<EmployeeConfirmEmployer> employeeConfirmEmployers;
 
 
    

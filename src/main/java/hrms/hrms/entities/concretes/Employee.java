@@ -1,20 +1,19 @@
 package hrms.hrms.entities.concretes;
 
+import hrms.hrms.core.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper=false)
+//@EqualsAndHashCode(callSuper=false)
 @Table(name="employees")
 @PrimaryKeyJoinColumn(name="id")
 public class Employee extends User {
@@ -27,6 +26,9 @@ public class Employee extends User {
 
     @Column(name="last_name")
     private String lastName;
+
+    @OneToMany(mappedBy="employee")
+    private List<EmployeeConfirm> employeeConfirms;
 
 
     
