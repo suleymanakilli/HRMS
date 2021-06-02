@@ -13,7 +13,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-//@EqualsAndHashCode(callSuper=false)
 @Table(name="employees")
 @PrimaryKeyJoinColumn(name="id")
 public class Employee extends User {

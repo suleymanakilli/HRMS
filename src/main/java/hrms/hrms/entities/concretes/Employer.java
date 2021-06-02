@@ -3,7 +3,6 @@ package hrms.hrms.entities.concretes;
 import hrms.hrms.core.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
@@ -13,7 +12,6 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Data
-//@EqualsAndHashCode(callSuper=false)
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor

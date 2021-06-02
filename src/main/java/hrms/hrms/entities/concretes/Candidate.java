@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import hrms.hrms.core.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -14,7 +13,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-//@EqualsAndHashCode(callSuper=false)
 @Table(name="candidates")
 @PrimaryKeyJoinColumn(name="id")
 @JsonIgnoreProperties({"hibernateLazyInitializer","candidateResumes"})

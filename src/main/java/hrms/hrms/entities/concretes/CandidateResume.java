@@ -1,6 +1,5 @@
 package hrms.hrms.entities.concretes;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,7 +22,7 @@ public class CandidateResume {
     @ManyToOne()
     @JoinColumn(name="candidate_id")
     private Candidate candidate;
-
+    
     @OneToMany(mappedBy="candidateResume")
     private List<Skill> skills;
 
