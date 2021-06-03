@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class EmployeeConfirmEmployer extends EmployeeConfirm {
 
     @ManyToOne()
-    @JoinColumn(name="employer_id")
+    @JoinColumn(name="employer_id",referencedColumnName =  "id")
     private Employer employer;
 
 }

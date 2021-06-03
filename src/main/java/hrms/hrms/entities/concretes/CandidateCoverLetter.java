@@ -20,7 +20,7 @@ public class CandidateCoverLetter {
     private int id;
 
     @ManyToOne()
-    @JoinColumn(name="candidate_id")
+    @JoinColumn(name="candidate_id",referencedColumnName =  "id")
     private Candidate candidate;
 
     @Column(name="title")

@@ -2,24 +2,30 @@ package hrms.hrms.business.concretes;
 
 import hrms.hrms.business.abstracts.CandidateService;
 import hrms.hrms.business.adapters.CandidateCheckService;
+import hrms.hrms.business.adapters.CandidateUploadImageService;
 import hrms.hrms.core.utilities.results.*;
 import hrms.hrms.dataAccess.abstracts.CandidateDao;
 import hrms.hrms.entities.concretes.Candidate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
 public class CandidateManager implements CandidateService {
     CandidateDao candidateDao;
     CandidateCheckService candidateCheckService;
+    CandidateUploadImageService candidateUploadImageService;
 
     @Autowired
-    public CandidateManager(CandidateDao candidateDao, CandidateCheckService candidateCheckService) {
+    public CandidateManager(CandidateDao candidateDao, CandidateCheckService candidateCheckService,CandidateUploadImageService candidateUploadImageService) {
         this.candidateDao = candidateDao;
         this.candidateCheckService = candidateCheckService;
+        this.candidateUploadImageService=candidateUploadImageService;
     }
 
     @Override
@@ -60,6 +66,15 @@ public class CandidateManager implements CandidateService {
     @Override
     public DataResult<Candidate> getById(int id) {
         return new SuccessDataResult<Candidate>(candidateDao.getOne(id));
+    }
+
+    @Override
+    public Result addImage(int candidateId, MultipartFile file) throws IOException {
+        Map result=candidateUploadImageService.uploadImage(file);
+        Candidate candidate=candidateDao.getOne(candidateId);
+        candidate.setImagePath(result.get("url").toString());
+        candidateDao.save(candidate);
+        return new SuccessResult("İşlem başarılı");
     }
 
     private boolean checkIfRealPerson(Candidate candidate){

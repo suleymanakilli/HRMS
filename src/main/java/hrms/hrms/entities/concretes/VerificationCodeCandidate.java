@@ -15,6 +15,6 @@ import javax.persistence.*;
 public class VerificationCodeCandidate extends VerificationCode {
 
     @ManyToOne()
-    @JoinColumn(name="candidate_id")
+    @JoinColumn(name="candidate_id",referencedColumnName =  "id")
     private Candidate candidate;
 }

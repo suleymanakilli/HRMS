@@ -21,7 +21,7 @@ public class WorkExperience {
     private int id;
 
     @ManyToOne()
-    @JoinColumn(name="resume_id")
+    @JoinColumn(name="resume_id",referencedColumnName =  "id")
     private CandidateResume candidateResume;
 
     @Column(name="workplace_name")

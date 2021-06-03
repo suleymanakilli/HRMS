@@ -29,6 +29,6 @@ public class EducationInformationManager implements EducationInformationService 
 
     @Override
     public DataResult<List<EducationInformation>> getAll() {
-        return new SuccessDataResult<List<EducationInformation>>();
+        return new SuccessDataResult<List<EducationInformation>>(educationInformationDao.findAll());
     }
 }

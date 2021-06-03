@@ -48,12 +48,12 @@ public class Candidate extends User {
     @OneToMany(mappedBy = "candidate")
     private List<CandidateResume> candidateResumes;
 
-    @OneToMany(mappedBy="candidate")
+    /*@OneToMany(mappedBy="candidate")
     private List<VerificationCodeCandidate> verificationCodeCandidates;
 
     @OneToMany(mappedBy="candidate")
     private List<CandidateCoverLetter> candidateCoverLetters;
-
+*/
 
     
 }

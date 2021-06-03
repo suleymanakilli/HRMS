@@ -1,5 +1,6 @@
 package hrms.hrms.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="candidate_resumes")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","educationInformations","workExperiences","skills"})
 public class CandidateResume {
 
     @Id
@@ -20,16 +22,16 @@ public class CandidateResume {
     private int id;
 
     @ManyToOne()
-    @JoinColumn(name="candidate_id")
+    @JoinColumn(name="candidate_id",referencedColumnName =  "id")
     private Candidate candidate;
     
-    @OneToMany(mappedBy="candidateResume")
+    @OneToMany(mappedBy="candidateResume", cascade = CascadeType.ALL)
     private List<Skill> skills;
 
-    @OneToMany(mappedBy="candidateResume")
+    @OneToMany(mappedBy="candidateResume", cascade = CascadeType.ALL)
     private List<WorkExperience> workExperiences;
 
-    @OneToMany(mappedBy="candidateResume")
+    @OneToMany(mappedBy="candidateResume", cascade = CascadeType.ALL)
     private List<EducationInformation> educationInformations;
 
 }

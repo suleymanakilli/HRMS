@@ -12,7 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="skills")
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","candidateResume"})
+//@JsonIgnoreProperties({"hibernateLazyInitializer","handler","candidateResume"})
 public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +20,7 @@ public class Skill {
     private int id;
 
     @ManyToOne()
-    @JoinColumn(name="resume_id")
+    @JoinColumn(name="resume_id",referencedColumnName = "id")
     private CandidateResume candidateResume;
 
     @Column(name="skill_name")
