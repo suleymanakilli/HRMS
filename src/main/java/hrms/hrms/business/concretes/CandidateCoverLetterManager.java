@@ -30,4 +30,9 @@ public class CandidateCoverLetterManager implements CandidateCoverLetterService 
     public DataResult<List<CandidateCoverLetter>> getAll() {
         return new SuccessDataResult<List<CandidateCoverLetter>>(candidateCoverLetterDao.findAll());
     }
+
+    @Override
+    public DataResult<List<CandidateCoverLetter>> getByCandidateId(int candidateId) {
+        return new SuccessDataResult<List<CandidateCoverLetter>>(candidateCoverLetterDao.getCandidateCoverLetterByCandidateId(candidateId));
+    }
 }

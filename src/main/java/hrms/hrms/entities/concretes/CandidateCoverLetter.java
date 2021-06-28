@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity
 @Data
@@ -23,9 +24,11 @@ public class CandidateCoverLetter {
     @JoinColumn(name="candidate_id",referencedColumnName =  "id")
     private Candidate candidate;
 
+    @Size(min=2)
     @Column(name="title")
     private String title;
 
+    @Size(min=10)
     @Column(name="text")
     private String text;
 }

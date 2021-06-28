@@ -31,4 +31,31 @@ public class SkillManager implements SkillService {
     public DataResult<List<Skill>> getAll() {
         return new SuccessDataResult<List<Skill>>(skillDao.findAll());
     }
+
+    @Override
+    public DataResult<Skill> getBySkillNameAndCandidateResumeId(String skillName, int candidateResumeId) {
+        return new SuccessDataResult<>(skillDao.getBySkillNameAndCandidateResume_Id(skillName,candidateResumeId));
+    }
+
+    @Override
+    public Result deleteBySkillNameAndResumeId(String skillName, int resumeId) {
+        Skill skill=skillDao.getBySkillNameAndCandidateResume_Id(skillName,resumeId);
+        skillDao.delete(skill);
+        //skillDao.deleteBySkillNameAndCandidateResume_Id(skillName,resumeId);
+        return new SuccessResult("Başarıyla silindi");
+    }
+
+    @Override
+    public Result deleteByResumeId(int resumeId) {
+        if(skillDao.existByCandidateResume_Id(resumeId)){
+            skillDao.deleteByCandidateResume_Id(resumeId);
+        }
+        return new SuccessResult("Başarıyla silindi");
+    }
+
+    @Override
+    public Result delete(int id) {
+        skillDao.deleteById(id);
+        return new SuccessResult("Başarıyla silindi");
+    }
 }

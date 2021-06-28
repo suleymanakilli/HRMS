@@ -1,17 +1,26 @@
 package hrms.hrms.api.controllers;
 import hrms.hrms.business.abstracts.CandidateService;
 import hrms.hrms.core.utilities.results.DataResult;
+import hrms.hrms.core.utilities.results.ErrorDataResult;
 import hrms.hrms.core.utilities.results.Result;
 import hrms.hrms.entities.concretes.Candidate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/candidates")
+@CrossOrigin
 public class CandidatesController {
     CandidateService candidateService;
 
@@ -29,15 +38,20 @@ public class CandidatesController {
     }
 
     @PostMapping("/add")
-    public Result add(@RequestBody Candidate candidate){
-        return candidateService.add(candidate);
+    public ResponseEntity<?> add(@Valid @RequestBody Candidate candidate){
+        return ResponseEntity.ok(candidateService.add(candidate));
     }
     @PostMapping("/update")
-    public Result changeMail(@RequestBody Candidate candidate){
-        return candidateService.changeMail(candidate);
+    public ResponseEntity<?> update(@Valid @RequestBody Candidate candidate){
+        return ResponseEntity.ok(candidateService.update(candidate));
+    }
+
+    @PostMapping("/changemail")
+    public ResponseEntity<?>  changeMail(@Valid @RequestBody Candidate candidate){
+        return ResponseEntity.ok(candidateService.changeMail(candidate));
     }
     @PostMapping("/delete")
-    public Result delete(@RequestBody Candidate candidate){
+    public Result delete(@Valid @RequestBody Candidate candidate){
         return candidateService.delete(candidate);
     }
 
@@ -45,6 +59,8 @@ public class CandidatesController {
     public Result addImage(@RequestParam int candidateId,@RequestParam("file") MultipartFile file) throws IOException {
         return candidateService.addImage(candidateId,file);
     }
+
+
 
 
 }

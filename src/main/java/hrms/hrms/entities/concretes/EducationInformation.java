@@ -4,8 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -21,10 +23,10 @@ public class EducationInformation {
     private int id;
 
     @Column(name="start_date")
-    private Date startDate;
+    private LocalDate startDate;
 
     @Column(name="end_date")
-    private Date endDate;
+    private LocalDate endDate;
 
     @ManyToOne()
     @JoinColumn(name="resume_id", referencedColumnName =  "id")

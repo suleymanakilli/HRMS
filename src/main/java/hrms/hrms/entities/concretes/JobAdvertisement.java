@@ -1,19 +1,14 @@
 package hrms.hrms.entities.concretes;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import java.util.Date;
+import javax.persistence.*;
+import javax.validation.constraints.Min;
+import java.time.LocalDate;
+import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -21,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Table(name="job_advertisements")
 @AllArgsConstructor
 @NoArgsConstructor
-
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","favoriteJobAdvertisements"})
 public class JobAdvertisement {
 	
 	@Id
@@ -32,6 +27,14 @@ public class JobAdvertisement {
 	@ManyToOne()
 	@JoinColumn(name="city_id",referencedColumnName =  "id")
 	private City city;
+
+	@ManyToOne()
+	@JoinColumn(name="way_of_work_id",referencedColumnName =  "id")
+	private WayOfWork wayOfWork;
+
+	@ManyToOne()
+	@JoinColumn(name="type_of_work_id",referencedColumnName =  "id")
+	private TypeOfWork typeOfWork;
 	
 	@ManyToOne()
 	@JoinColumn(name="job_title_id")
@@ -45,19 +48,27 @@ public class JobAdvertisement {
 	private String description;
 	
 	@Column(name="min_salary")
-	private double minSalary;
+	private Integer minSalary;
 	
 	@Column(name="max_salary")
-	private double maxSalary;
-	
+	private Integer maxSalary;
+
+	@Min(value=1)
 	@Column(name="open_position_number")
 	private int openPositionNumber;
 	
 	@Column(name="deadline")
-	private Date deadline;
-	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private LocalDate deadline;
+
 	@Column(name="release_date")
-	private Date releaseDate;
+	private LocalDate releaseDate=LocalDate.now();
+
+	@Column(name="is_approved")
+	private boolean isApproved=false;
+
+	@OneToMany(mappedBy="jobAdvertisement")
+	private List<FavoriteJobAdvertisement> favoriteJobAdvertisements;
 	
 	
 }

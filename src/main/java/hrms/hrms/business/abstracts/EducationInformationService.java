@@ -8,5 +8,8 @@ import java.util.List;
 
 public interface EducationInformationService {
     Result add(EducationInformation educationInformation);
+    Result delete(int id);
+    Result deleteByResumeId(int resumeId);
     DataResult<List<EducationInformation>> getAll();
+    DataResult<EducationInformation> getById(int educationId);
 }

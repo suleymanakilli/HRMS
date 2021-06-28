@@ -31,4 +31,18 @@ public class WorkExperienceManager implements WorkExperienceService {
     public DataResult<List<WorkExperience>> getAll() {
         return new SuccessDataResult<List<WorkExperience>>(workExperienceDao.findAll());
     }
+
+    @Override
+    public Result delete(int id) {
+        workExperienceDao.deleteById(id);
+        return new SuccessResult("Başarıyla silindi");
+    }
+
+    @Override
+    public Result deleteByResumeId(int resumeId) {
+        if(workExperienceDao.existByCandidateResume_Id(resumeId)){
+            workExperienceDao.deleteByCandidateResume_Id(resumeId);
+        }
+        return new SuccessResult("Başarıyla silindi");
+    }
 }

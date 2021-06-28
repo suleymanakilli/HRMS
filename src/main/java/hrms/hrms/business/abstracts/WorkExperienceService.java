@@ -9,4 +9,6 @@ import java.util.List;
 public interface WorkExperienceService {
     Result add(WorkExperience workExperience);
     DataResult<List<WorkExperience>>getAll();
+    Result delete(int id);
+    Result deleteByResumeId(int resumeId);
 }

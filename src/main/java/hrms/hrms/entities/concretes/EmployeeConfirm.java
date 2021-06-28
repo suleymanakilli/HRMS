@@ -1,10 +1,12 @@
 package hrms.hrms.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -12,6 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="employee_confirms")
+//@JsonIgnoreProperties({"hibernateLazyInitializer","handler","employee"})
 @Inheritance(strategy = InheritanceType.JOINED)
 public class EmployeeConfirm {
 
@@ -28,5 +31,5 @@ public class EmployeeConfirm {
     private boolean isConfirmed;
 
     @Column(name="confirm_date")
-    private Date confirmDate;
+    private LocalDate confirmDate;
 }

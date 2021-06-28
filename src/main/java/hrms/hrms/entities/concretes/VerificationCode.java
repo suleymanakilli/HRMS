@@ -1,10 +1,12 @@
 package hrms.hrms.entities.concretes;
 
+import com.sun.istack.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -24,11 +26,11 @@ public class VerificationCode {
     private String code;
 
     @Column(name="is_verified")
-    private boolean isVerified;
+    private boolean isVerified=false;
 
     @Column(name="send_date")
-    private Date sendDate;
+    private LocalDate sendDate=LocalDate.now();
 
     @Column(name="verified_date")
-    private Date verifiedDate;
+    private LocalDate verifiedDate;
 }

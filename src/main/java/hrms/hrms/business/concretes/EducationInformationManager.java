@@ -23,12 +23,33 @@ public class EducationInformationManager implements EducationInformationService 
 
     @Override
     public Result add(EducationInformation educationInformation) {
+
         educationInformationDao.save(educationInformation);
         return new SuccessResult("Başarıyla eklendi");
     }
 
     @Override
+    public Result delete(int id) {
+        educationInformationDao.deleteById(id);
+        return new SuccessResult("Başarıyla silindi");
+    }
+
+    @Override
+    public Result deleteByResumeId(int resumeId) {
+        if(educationInformationDao.existByCandidateResume_Id(resumeId)){
+            educationInformationDao.deleteByCandidateResume_Id(resumeId);
+        }
+
+        return new SuccessResult("Başarıyla silindi");
+    }
+
+    @Override
     public DataResult<List<EducationInformation>> getAll() {
         return new SuccessDataResult<List<EducationInformation>>(educationInformationDao.findAll());
+    }
+
+    @Override
+    public DataResult<EducationInformation> getById(int educationId) {
+        return new SuccessDataResult<EducationInformation>(educationInformationDao.getOne(educationId));
     }
 }

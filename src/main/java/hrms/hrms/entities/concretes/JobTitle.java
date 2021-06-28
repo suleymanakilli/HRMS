@@ -14,7 +14,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="job_titles")
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","jobAdvertisements"})
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","jobAdvertisements","workExperiences"})
 public class JobTitle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,4 +26,7 @@ public class JobTitle {
 
     @OneToMany(mappedBy="jobTitle")
     private List<JobAdvertisement> jobAdvertisements;
+
+    @OneToMany(mappedBy="jobTitle")
+    private List<WorkExperience> workExperiences;
 }

@@ -9,4 +9,5 @@ import java.util.List;
 public interface CandidateCoverLetterService {
     Result add(CandidateCoverLetter candidateCoverLetter);
     DataResult<List<CandidateCoverLetter>> getAll();
+    DataResult<List<CandidateCoverLetter>> getByCandidateId(int candidateId);
 }

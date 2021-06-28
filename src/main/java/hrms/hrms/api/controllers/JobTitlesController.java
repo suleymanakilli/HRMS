@@ -1,22 +1,23 @@
 package hrms.hrms.api.controllers;
 
 import hrms.hrms.business.abstracts.JobTitleService;
-import hrms.hrms.core.utilities.results.DataResult;
-import hrms.hrms.core.utilities.results.Result;
-import hrms.hrms.core.utilities.results.SuccessDataResult;
-import hrms.hrms.core.utilities.results.SuccessResult;
+import hrms.hrms.core.utilities.results.*;
 import hrms.hrms.entities.concretes.JobTitle;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/jobtitles")
+@CrossOrigin
 public class JobTitlesController {
     private JobTitleService jobTitleService;
 
@@ -31,7 +32,9 @@ public class JobTitlesController {
     }
 
     @PostMapping("/add")
-    public Result add(@RequestBody JobTitle jobTitle){
-        return jobTitleService.add(jobTitle);
+    public ResponseEntity<?> add(@Valid @RequestBody JobTitle jobTitle){
+        return ResponseEntity.ok(jobTitleService.add(jobTitle));
     }
+
+
 }

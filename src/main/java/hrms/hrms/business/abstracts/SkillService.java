@@ -9,4 +9,8 @@ import java.util.List;
 public interface SkillService {
     Result add(Skill skill);
     DataResult<List<Skill>> getAll();
+    DataResult<Skill> getBySkillNameAndCandidateResumeId(String skillName,int candidateResumeId);
+    Result deleteBySkillNameAndResumeId(String skillName,int resumeId);
+    Result deleteByResumeId(int resumeId);
+    Result delete(int id);
 }
